@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { BehaviorSubject } from "rxjs";
+import { Book, BookEntity } from "./home.model";
 
 @Injectable({ providedIn: "root" })
 export class HomeService {
@@ -11,11 +12,7 @@ export class HomeService {
 
     getBookGallery() {
         console.log("Book Gallery");
-        this._http.get("http://10.0.2.2:8000/api/v1/books")
-            .subscribe((res) => {
-                console.log(res);
-            }, (err) => {
-                console.log(err);
-            });
+
+        return this._http.get("http://34.93.249.161:8000/api/v1/books");
     }
 }

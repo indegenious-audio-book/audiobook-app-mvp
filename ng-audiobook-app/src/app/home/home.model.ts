@@ -1,3 +1,13 @@
 export class Book {
-    constructor(public book_id: number, public book_title: string, public author_name: string, public published_year: number) { }
+    count: number;
+    next: any;
+    previous: any;
+    results: Array<BookEntity>;
+}
+
+export class BookEntity {
+    book_id: number;
+    book_title: string;
+    author_name: string;
+    published_year: number;
 }
