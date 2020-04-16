@@ -6,7 +6,6 @@ import { ScrollView, ScrollEventData } from "tns-core-modules/ui/scroll-view";
 import { EventData } from "tns-core-modules/ui/page/page";
 import { Book, BookEntity } from "./home.model";
 
-
 @Component({
     selector: "Home",
     templateUrl: "./home.component.html"
@@ -14,16 +13,15 @@ import { Book, BookEntity } from "./home.model";
 export class HomeComponent implements OnInit {
     countries: Array<any> = [];
     bookList: Array<BookEntity> = [];
-    mockedDataArray: any = [{ name: "India", continent: "Asia" }, { name: "United States", continent: "America" }, { name: "Australa", continent: "Australia" }, { name: "Japan", continent: "Asia" }];
+    mockedDataArray: any = [
+        { name: "India", continent: "Asia" },
+        { name: "United States", continent: "America" },
+        { name: "Australa", continent: "Australia" },
+        { name: "Japan", continent: "Asia" }
+    ];
     constructor(private homeService: HomeService) {
         // Use the component constructor to inject providers.
     }
-    // onScroll(args: ScrollEventData) {
-    //     const scrollView = args.object as ScrollView;
-
-    //     console.log("scrollX: " + args.scrollX);
-    //     console.log("scrollY: " + args.scrollY);
-    // }
 
     ngOnInit(): void {
         // Init your component properties here.
@@ -56,5 +54,9 @@ export class HomeComponent implements OnInit {
         // scroll to specific position of the horizontal scroll list
         const scrollOffset = 330;
         (<ScrollView>args.object).scrollToHorizontalOffset(scrollOffset, true);
+    }
+    onDrawerButtonTap(): void {
+        const sideDrawer = <RadSideDrawer>app.getRootView();
+        sideDrawer.showDrawer();
     }
 }

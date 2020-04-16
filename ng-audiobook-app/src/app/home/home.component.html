@@ -1,19 +1,31 @@
-<StackLayout *ngFor="let book of bookList">
-    <Label [text]="book.book_id"></Label>
-    <Label [text]="book.book_title"></Label>
-    <Label [text]="book.author_name"></Label>
-    <Label [text]="book.published_year"></Label>
-</StackLayout>
+<ActionBar>
+    <!--
+    Use the NavigationButton as a side-drawer button in Android
+    because ActionItems are shown on the right side of the ActionBar
+    -->
+    <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
+    <!--
+    Use the ActionItem for IOS with position set to left. Using the
+    NavigationButton as a side-drawer button in iOS is not possible,
+    because its function is to always navigate back in the application.
+    -->
+    <ActionItem icon="res://menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()" ios.position="left">
+    </ActionItem>
+    <Label text="Home"></Label>
+</ActionBar>
 
-
-<ScrollView orientation="horizontal" (loaded)="onScrollLoaded($event)" (scroll)="onScroll($event)">
-    <StackLayout orientation="horizontal" class="list-group" height="300">
-        <GridLayout *ngFor="let country of countries" id="{{ 'id' + country.id }}" (tap)="onTap($event)" rows="*, auto" columns="300" class="list-group-item m-15 active">
-            <Image row="0" rowSpan="2" [src]="country.data.imageSrc" stretch="aspectFill"></Image>
-            <StackLayout row="1" class="list-group-item" opacity="0.7" backgroundColor="gray" color="black">
-                <Label class="list-group-item-heading" [text]="country.data.name" opacity="1" color="white"></Label>
-                <Label class="list-group-item-text" [text]="'Continent: '+country.data.continent" opacity="1" color="white"></Label>
-            </StackLayout>
-        </GridLayout>
-    </StackLayout>
-</ScrollView>
+<GridLayout class="page__content">
+    <Label class="page__content-icon fas" text="&#xf015;"></Label>
+    <Label class="page__content-placeholder" text="<!-- Page content goes here -->"></Label>
+    <ScrollView orientation="horizontal" (loaded)="onScrollLoaded($event)" (scroll)="onScroll($event)">
+        <StackLayout orientation="horizontal" class="list-group" height="300">
+            <GridLayout *ngFor="let country of countries" id="{{ 'id' + country.id }}" (tap)="onTap($event)" rows="*, auto" columns="300" class="list-group-item m-15 active">
+                <Image row="0" rowSpan="2" [src]="country.data.imageSrc" stretch="aspectFill"></Image>
+                <StackLayout row="1" class="list-group-item" opacity="0.7" backgroundColor="gray" color="black">
+                    <Label class="list-group-item-heading" [text]="country.data.name" opacity="1" color="white"></Label>
+                    <Label class="list-group-item-text" [text]="'Continent: '+country.data.continent" opacity="1" color="white"></Label>
+                </StackLayout>
+            </GridLayout>
+        </StackLayout>
+    </ScrollView>
+</GridLayout>
