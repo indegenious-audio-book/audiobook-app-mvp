@@ -11,12 +11,12 @@
     -->
     <ActionItem icon="res://menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()" ios.position="left">
     </ActionItem>
-    <Label text="Home"></Label>
+    <Label text="Gallery"></Label>
 </ActionBar>
 
-<GridLayout class="page__content">
+<!-- <GridLayout class="page__content">
     <Label class="page__content-icon fas" text="&#xf015;"></Label>
-    <Label class="page__content-placeholder" text="<!-- Page content goes here -->"></Label>
+    <Label class="page__content-placeholder" text="Test Content"></Label>
     <ScrollView orientation="horizontal" (loaded)="onScrollLoaded($event)" (scroll)="onScroll($event)">
         <StackLayout orientation="horizontal" class="list-group" height="300">
             <GridLayout *ngFor="let country of countries" id="{{ 'id' + country.id }}" (tap)="onTap($event)" rows="*, auto" columns="300" class="list-group-item m-15 active">
@@ -28,4 +28,22 @@
             </GridLayout>
         </StackLayout>
     </ScrollView>
+</GridLayout> -->
+
+<GridLayout>
+    <RadListView [items]="bookList">
+        <ng-template tkListItemTemplate let-book="item">
+            <StackLayout orientation="vertical">
+                <!-- <Image [src]="'https:' + event.image" stretch="aspectFit"></Image> -->
+                <!-- <Label [nsRouterLink]="['/event', book.book_id]" [text]="book.book_title"></Label> -->
+                <GridLayout rows="*, auto" columns="300" class="list-group-item m-15 active" color="black">
+                    <Image row="0" rowSpan="2" [src]="null" stretch="aspectFit"></Image>
+                    <StackLayout row="1" class="list-group-item" opacity="0.7" backgroundColor="gray">
+                        <Label class="list-group-item-heading" [text]="'Author: '+book.book_title" opacity="1" color="white"></Label>
+                        <Label class="list-group-item-text" [text]="'Author: '+book.author_name" opacity="1" color="white"></Label>
+                    </StackLayout>
+                </GridLayout>
+            </StackLayout>
+        </ng-template>
+    </RadListView>
 </GridLayout>

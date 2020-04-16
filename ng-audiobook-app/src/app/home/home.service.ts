@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { BehaviorSubject } from "rxjs";
-import { Book, BookEntity } from "./home.model";
 
 @Injectable({ providedIn: "root" })
 export class HomeService {
