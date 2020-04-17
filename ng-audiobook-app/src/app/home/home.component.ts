@@ -3,33 +3,29 @@ import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "tns-core-modules/application";
 import { HomeService } from "./home.service";
 import { ScrollView, ScrollEventData } from "tns-core-modules/ui/scroll-view";
-import { EventData } from "tns-core-modules/ui/page/page";
+import { EventData, Page } from "tns-core-modules/ui/page/page";
 import { Book, BookEntity } from "./home.model";
-
+import { RouterExtensions } from "nativescript-angular/router";
+import { SegmentedBar, SegmentedBarItem } from "tns-core-modules/ui/segmented-bar";
+import { screen } from "tns-core-modules/platform";
 @Component({
     selector: "Home",
-    templateUrl: "./home.component.html"
+    moduleId: module.id,
+    templateUrl: "./home.component.html",
+    styleUrls: ["./home.component.css"]
 })
 export class HomeComponent implements OnInit {
-    countries: Array<any> = [];
+    viewHeigth: number = 0;
     bookList: Array<BookEntity> = [];
-    mockedDataArray: any = [
-        { name: "India", continent: "Asia" },
-        { name: "United States", continent: "America" },
-        { name: "Australa", continent: "Australia" },
-        { name: "Japan", continent: "Asia" }
-    ];
-    constructor(private homeService: HomeService) {
+
+    constructor(private homeService: HomeService, private router: RouterExtensions, private page: Page) {
         // Use the component constructor to inject providers.
     }
 
     ngOnInit(): void {
         // Init your component properties here.
-
-        for (let index = 0; index < this.mockedDataArray.length; index++) {
-            // creating an object with additional id key to re-use as unique id
-            this.countries.push({ data: this.mockedDataArray[index], id: index });
-        }
+        this.page.actionBarHidden = true;
+        this.viewHeigth = screen.mainScreen.heightDIPs * 0.6;
 
         this.homeService.getBookGallery()
             .subscribe((res: Book) => {
@@ -41,22 +37,14 @@ export class HomeComponent implements OnInit {
         console.log("New List" + this.bookList);
     }
 
-    onTap(args: EventData) {
-        // using the unique id assigned via the view-model
-        console.log(args.object.get("id"));
+    goToArtist() {
+        this.router.navigate(["artist"]);
     }
 
-    onScroll(args: ScrollEventData) {
-        console.log("scrollX: " + args.scrollX + "; scrollY: " + args.scrollY);
+    goToPlayer() {
+        this.router.navigate(["player"]);
     }
-
-    onScrollLoaded(args) {
-        // scroll to specific position of the horizontal scroll list
-        const scrollOffset = 330;
-        (<ScrollView>args.object).scrollToHorizontalOffset(scrollOffset, true);
-    }
-    onDrawerButtonTap(): void {
-        const sideDrawer = <RadSideDrawer>app.getRootView();
-        sideDrawer.showDrawer();
+    gotolist() {
+        this.router.navigate(["list"]);
     }
 }
