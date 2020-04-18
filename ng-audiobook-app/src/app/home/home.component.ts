@@ -6,7 +6,6 @@ import { ScrollView, ScrollEventData } from "tns-core-modules/ui/scroll-view";
 import { EventData, Page } from "tns-core-modules/ui/page/page";
 import { Book, BookEntity } from "./home.model";
 import { RouterExtensions } from "nativescript-angular/router";
-import { SegmentedBar, SegmentedBarItem } from "tns-core-modules/ui/segmented-bar";
 import { screen } from "tns-core-modules/platform";
 @Component({
     selector: "Home",
@@ -45,6 +44,6 @@ export class HomeComponent implements OnInit {
         this.router.navigate(["player"]);
     }
     gotolist() {
-        this.router.navigate(["list"]);
+        this.router.navigate(["browse"]);
     }
 }
