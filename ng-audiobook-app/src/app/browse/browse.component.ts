@@ -23,13 +23,20 @@ export class BrowseComponent implements OnInit {
         // Use the component constructor to inject providers.
         this._player = new TNSPlayer();
         this._player.debug = true;
-        this._player
-            .initFromFile({
-                audioFile: "~/audio/ep1.mp3", // ~ = app directory
-                loop: false,
-                completeCallback: this._trackComplete.bind(this),
-                errorCallback: this._trackError.bind(this)
-            })
+    }
+
+    ngOnInit(): void {
+        // Init your component properties here.
+        this.page.actionBarHidden = true;
+
+    }
+    async playRemoteFile() {
+        this._player.playFromUrl({
+            audioFile: "http://34.93.249.161:9000/twenty_thousand_leagues_under_the_sea/ep1.mp3",
+            loop: false,
+            completeCallback: this._trackComplete.bind(this),
+            errorCallback: this._trackError.bind(this)
+        })
             .then(() => {
                 this._player.getAudioTrackDuration().then((duration) => {
                     // iOS: duration is in seconds
@@ -38,10 +45,9 @@ export class BrowseComponent implements OnInit {
                 });
             });
     }
-
-    ngOnInit(): void {
-        // Init your component properties here.
-        this.page.actionBarHidden = true;
+    public async stopPlaying(args) {
+        await this._player.dispose();
+        alert('Media Player Disposed.');
     }
 
     ngAfterViewInit() {

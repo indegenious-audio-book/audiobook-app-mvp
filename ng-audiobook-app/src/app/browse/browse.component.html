@@ -1,8 +1,8 @@
 <GridLayout class="window" #bg>
     <ScrollView scrollBarIndicatorVisible="false">
         <StackLayout>
-            <Label row="0" col="1" text="h" class="icoPB" fontSize="28" horizontalAlignment="center" margin="25" (tap)="goBack()"></Label>
-            <Image row="0" col="0" src="~/img/camila-songs/1.png" width="300" height="300" borderRadius="10" (tap)="blurImg()"></Image>
+            <Label row="0" col="1" text="h" class="icoPB" fontSize="28" horizontalAlignment="center" margin="25"></Label>
+            <Image row="0" col="0" src="~/img/camila-songs/1.png" width="300" height="300" borderRadius="10"></Image>
             <Label text="never be the same" class="song-title mt" fontWeight="400" padding="40 0 30 0" horizontalAlignment="center"></Label>
             <GridLayout columns="*, *" rows="auto, auto" margin="0 40">
                 <GridLayout col="0" row="0" columns="*" rows="auto" colSpan="2">
@@ -16,8 +16,8 @@
             <GridLayout columns="*, *, *, *, *" rows="100" padding="20 15 10 19">
                 <Label verticalAlignment="center" row="0" col="0" text="f" class="icoPB" fontSize="" textAlignment="center"></Label>
                 <Label verticalAlignment="center" row="0" col="1" text="b" class="icoPB bt1" padding="15 0" fontSize="20" marginRight="20" textAlignment="center"></Label>
-                <Label verticalAlignment="center" row="0" col="2" text="d" class="icoPB bt2" padding="20 0" fontSize="32" textAlignment="center"></Label>
-                <Label verticalAlignment="center" row="0" col="3" text="a" class="icoPB bt3" padding="15 0" fontSize="20" marginLeft="20" textAlignment="center"></Label>
+                <Label verticalAlignment="center" row="0" col="2" text="d" class="icoPB bt2" padding="20 0" fontSize="32" textAlignment="center" (tap)="playRemoteFile()"></Label>
+                <Label verticalAlignment="center" row="0" col="3" text="a" class="icoPB bt3" padding="15 0" fontSize="20" marginLeft="20" textAlignment="center" (tap)="stopPlaying()"></Label>
                 <Label verticalAlignment="center" row="0" col="4" text="e" class="icoPB" fontSize="" textAlignment="center"></Label>
             </GridLayout>
 
