@@ -9,6 +9,7 @@ import { GridLayout } from "tns-core-modules/ui/layouts/grid-layout";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "tns-core-modules/application";
 import { TNSPlayer } from "nativescript-audio";
+import { knownFolders } from "tns-core-modules/file-system/file-system";
 
 @Component({
     selector: "Browse",
@@ -33,6 +34,27 @@ export class BrowseComponent implements OnInit {
     async playRemoteFile() {
         this._player.playFromUrl({
             audioFile: "http://34.93.249.161:9000/twenty_thousand_leagues_under_the_sea/ep1.mp3",
+            loop: false,
+            completeCallback: this._trackComplete.bind(this),
+            errorCallback: this._trackError.bind(this)
+        })
+            .then(() => {
+                this._player.getAudioTrackDuration().then((duration) => {
+                    // iOS: duration is in seconds
+                    // Android: duration is in milliseconds
+                    console.log(`song duration:`, duration);
+                });
+            });
+    }
+
+    async PlayLocalFile() {
+        const audioFolder = knownFolders.currentApp().getFolder("audio");
+        console.log(audioFolder);
+        const recordedFile = audioFolder.getFile(`ep1.mp3`);
+        console.log(recordedFile);
+        // const localFile = localFolder.getFile(`${args.object.audioId.toString()}.mp3`);
+        this._player.playFromFile({
+            audioFile: recordedFile.path,
             loop: false,
             completeCallback: this._trackComplete.bind(this),
             errorCallback: this._trackError.bind(this)
