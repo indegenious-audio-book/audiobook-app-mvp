@@ -18,6 +18,7 @@ import { knownFolders } from "tns-core-modules/file-system/file-system";
     styleUrls: ["./browse.component.css"]
 })
 export class BrowseComponent implements OnInit {
+    playIconFlag: string = "c";
     @ViewChild("bg", { static: false }) gridlayout: ElementRef;
     private _player: TNSPlayer;
     constructor(private router: RouterExtensions, private page: Page) {
@@ -32,6 +33,7 @@ export class BrowseComponent implements OnInit {
 
     }
     async playRemoteFile() {
+        this.playIconFlag = "d";
         this._player.playFromUrl({
             audioFile: "http://34.93.249.161:9000/twenty_thousand_leagues_under_the_sea/ep1.mp3",
             loop: false,
@@ -69,7 +71,8 @@ export class BrowseComponent implements OnInit {
     }
     public async stopPlaying(args) {
         await this._player.dispose();
-        alert('Media Player Disposed.');
+        this.playIconFlag = "c";
+        alert("Media Player Disposed.");
     }
 
     ngAfterViewInit() {

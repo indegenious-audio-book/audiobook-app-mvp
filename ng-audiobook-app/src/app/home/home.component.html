@@ -31,8 +31,8 @@
                 <ScrollView orientation="horizontal" scrollBarIndicatorVisible="false">
                     <StackLayout orientation="horizontal">
                         <GridLayout rows="*" columns="*" class="genre-tiles g1">
-                            <Image row="0" col="0" src="~/img/electro.png" width="145"></Image>
-                            <Label row="0" col="0" text="ELECTRONIC" horizontalAlignment="center" verticalAlignment="center" class="mt fs14 ls"></Label>
+                            <Image row="0" col="0" src="~/img/sciencefiction.png" width="145"></Image>
+                            <Label row="0" col="0" text="SCIENCE FICTION" horizontalAlignment="center" verticalAlignment="center" class="mt fs14 ls"></Label>
                         </GridLayout>
                         <GridLayout rows="*" columns="*" class="genre-tiles">
                             <Image row="0" col="0" src="~/img/rock.png" width="300"></Image>
@@ -44,7 +44,7 @@
                         </GridLayout>
                     </StackLayout>
                 </ScrollView>
-                <Label text="ARTISTS" class="p15 sf fw800" color="#374064"></Label>
+                <Label text="AUTHORS" class="p15 sf fw800" color="#374064"></Label>
                 <ScrollView scrollBarIndicatorVisible="false" orientation="horizontal">
                     <StackLayout orientation="horizontal" paddingRight="15">
                         <GridLayout rows="*" columns="*" width="170" paddingLeft="15" (tap)="goToArtist()">
@@ -80,7 +80,7 @@
                     </StackLayout>
                 </ScrollView>
                 <!-- PLAYLISTS -->
-                <Label text="PLAYLISTS" class="p15 sf fw800" color="#374064"></Label>
+                <Label text="TITLES" class="p15 sf fw800" color="#374064"></Label>
                 <ScrollView scrollBarIndicatorVisible="false" orientation="horizontal">
                     <StackLayout orientation="horizontal" paddingBottom="15" paddingRight="15">
                         <GridLayout rows="*, *" columns="*, *" width="155" marginLeft="15" borderRadius="8">
@@ -112,7 +112,7 @@
     <GridLayout row="1" rows="*" columns="*">
         <Image row="0" col="0" src="~/img/nav.png" opacity="0.6"></Image>
         <GridLayout row="0" col="0" rows="*" columns="*, *, *, *, *" class="nav">
-            <Label row="0" col="0" text="&#xf39e;" horizontalAlignment="center" verticalAlignment="center" class="ico active"></Label>
+            <Label row="0" col="0" text="a" horizontalAlignment="center" verticalAlignment="center" class="ico active"></Label>
             <Label row="0" col="1" text="b" horizontalAlignment="center" verticalAlignment="center" class="ico fs20" (tap)="gotolist()"></Label>
             <Label row="0" col="2" text="c" horizontalAlignment="center" verticalAlignment="center" class="ico fs20" (tap)="goToPlayer()"></Label>
             <Label row="0" col="3" text="d" horizontalAlignment="center" verticalAlignment="center" class="ico fs20"></Label>

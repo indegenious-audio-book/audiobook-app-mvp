@@ -9,15 +9,16 @@
                     <GridLayout col="0" row="0" horizontalAlignment="center" verticalAlignment="center" class="time-line"></GridLayout>
                     <GridLayout col="0" row="0" horizontalAlignment="left" verticalAlignment="center" class="time-passed"></GridLayout>
                     <GridLayout col="0" row="0" horizontalAlignment="left" verticalAlignment="center" class="time-indicator"></GridLayout>
+                    <ActivityIndicator rowSpan="3" busy="true"></ActivityIndicator>
                 </GridLayout>
                 <Label row="1" col="0" text="0:55" class="sfl fw100 w" fontSize="13" horizontalAlignment="left"></Label>
                 <Label row="1" col="1" text="2:54" class="sfl fw100 w" fontSize="13" horizontalAlignment="right"></Label>
             </GridLayout>
             <GridLayout columns="*, *, *, *, *" rows="100" padding="20 15 10 19">
                 <Label verticalAlignment="center" row="0" col="0" text="f" class="icoPB" fontSize="" textAlignment="center"></Label>
-                <Label verticalAlignment="center" row="0" col="1" text="L" class="icoPB bt1" padding="15 0" fontSize="20" marginRight="20" textAlignment="center"></Label>
-                <Label verticalAlignment="center" row="0" col="2" text="R" class="icoPB bt2" padding="20 0" fontSize="32" textAlignment="center" (tap)="playRemoteFile()"></Label>
-                <Label verticalAlignment="center" row="0" col="3" text="S" class="icoPB bt3" padding="15 0" fontSize="20" marginLeft="20" textAlignment="center" (tap)="stopPlaying()"></Label>
+                <Label verticalAlignment="center" row="0" col="1" text="b" class="icoPB bt1" padding="15 0" fontSize="20" marginRight="20" textAlignment="center"></Label>
+                <Label verticalAlignment="center" row="0" col="2" [text]="playIconFlag" class="icoPB bt2" padding="20 0" fontSize="32" textAlignment="center" (tap)="playRemoteFile()"></Label>
+                <Label verticalAlignment="center" row="0" col="3" text="a" class="icoPB bt3" padding="15 0" fontSize="20" marginLeft="20" textAlignment="center" (tap)="stopPlaying()"></Label>
                 <Label verticalAlignment="center" row="0" col="4" text="e" class="icoPB" fontSize="" textAlignment="center"></Label>
             </GridLayout>
 
