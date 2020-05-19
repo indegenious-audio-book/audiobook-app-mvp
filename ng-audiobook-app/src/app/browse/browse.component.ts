@@ -1,15 +1,13 @@
-import { SegmentedBar, SegmentedBarItem } from "tns-core-modules/ui/segmented-bar";
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from "@angular/core";
 import { RouterExtensions } from "nativescript-angular/router";
-import { TabView } from "tns-core-modules/ui/tab-view";
 import { Page } from "tns-core-modules/ui/page/page";
-import { ObservableArray } from "tns-core-modules/data/observable-array";
-import { ListViewEventData, RadListView, ListViewLoadOnDemandMode } from "nativescript-ui-listview";
-import { GridLayout } from "tns-core-modules/ui/layouts/grid-layout";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "tns-core-modules/application";
 import { TNSPlayer } from "nativescript-audio";
 import { knownFolders } from "tns-core-modules/file-system/file-system";
+import { ActivatedRoute } from "@angular/router";
+import { BookService } from "../book/book.service";
+import { ChapterEntity, Chapter } from "../data/book.model";
 
 @Component({
     selector: "Browse",
@@ -18,35 +16,51 @@ import { knownFolders } from "tns-core-modules/file-system/file-system";
     styleUrls: ["./browse.component.css"]
 })
 export class BrowseComponent implements OnInit {
+    selectedBook: any;
+    trackDuration: number = 0;
+    chapterList: Array<ChapterEntity>;
     playIconFlag: string = "c";
+    isPlaying: boolean = false;
+    currentTrack: string = "";
     @ViewChild("bg", { static: false }) gridlayout: ElementRef;
     private _player: TNSPlayer;
-    constructor(private router: RouterExtensions, private page: Page) {
+    constructor(private router: RouterExtensions, private page: Page, private routeParams: ActivatedRoute, private bookService: BookService) {
         // Use the component constructor to inject providers.
         this._player = new TNSPlayer();
         this._player.debug = true;
+
     }
 
     ngOnInit(): void {
         // Init your component properties here.
         this.page.actionBarHidden = true;
-
+        this.routeParams.params
+            .forEach((params) => { this.selectedBook = +params["BookSelected"]; });
+        console.log(this.selectedBook);
+        this.bookService.getBooksBychapter(this.selectedBook).subscribe((res: Chapter) => {
+            this.chapterList = res.results;
+        });
     }
-    async playRemoteFile() {
-        this.playIconFlag = "d";
-        this._player.playFromUrl({
-            audioFile: "http://34.93.249.161:9000/twenty_thousand_leagues_under_the_sea/ep1.mp3",
-            loop: false,
-            completeCallback: this._trackComplete.bind(this),
-            errorCallback: this._trackError.bind(this)
-        })
-            .then(() => {
-                this._player.getAudioTrackDuration().then((duration) => {
-                    // iOS: duration is in seconds
-                    // Android: duration is in milliseconds
-                    console.log(`song duration:`, duration);
+    async playRemoteFile(chapter: ChapterEntity) {
+        if (!this.isPlaying) {
+            this.isPlaying = true;
+            this.playIconFlag = "d";
+            this.currentTrack = chapter.chapter_title;
+            this._player.playFromUrl({
+                audioFile: "http://34.93.249.161:9000/" + chapter.chapter_url,
+                loop: false,
+                completeCallback: this._trackComplete.bind(this),
+                errorCallback: this._trackError.bind(this)
+            })
+                .then(() => {
+                    this._player.getAudioTrackDuration().then((duration: any) => {
+                        // iOS: duration is in seconds
+                        // Android: duration is in milliseconds
+                        this.trackDuration = (duration / 1000);
+                        console.log(`song duration:`, duration);
+                    });
                 });
-            });
+        }
     }
 
     async PlayLocalFile() {
@@ -69,10 +83,10 @@ export class BrowseComponent implements OnInit {
                 });
             });
     }
-    public async stopPlaying(args) {
+    async stopPlaying() {
         await this._player.dispose();
+        this.isPlaying = false;
         this.playIconFlag = "c";
-        alert("Media Player Disposed.");
     }
 
     ngAfterViewInit() {
@@ -94,17 +108,25 @@ export class BrowseComponent implements OnInit {
     togglePlay() {
         if (this._player.isAudioPlaying()) {
             this._player.pause();
+            this.playIconFlag = "c";
+            this.isPlaying = false;
         } else {
-            this._player.play();
+            if (this.currentTrack !== "") {
+                this._player.play();
+                this.playIconFlag = "d";
+            }
+
         }
     }
 
     private _trackComplete(args: any) {
+        this.isPlaying = false;
         console.log("reference back to player:", args.player);
         // iOS only: flag indicating if completed succesfully
         console.log("whether song play completed successfully:", args.flag);
     }
     private _trackError(args: any) {
+        this.isPlaying = false;
         console.log("reference back to player:", args.player);
         console.log("the error:", args.error);
         // Android only: extra detail on error

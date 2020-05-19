@@ -5,7 +5,7 @@
             <GridLayout row="0" rows="*, *, *" class="header">
                 <GridLayout row="0" rows="*" columns="*, auto" padding="15">
                     <Label row="0" col="0" text="EXPLORE" class="title sf"></Label>
-                    <Image row="0" col="1" src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=d74712e9b31ac943d46541e6e6ed559f&auto=format&fit=crop&w=800&q=80" class="profile-img" shadow="3"></Image>
+                    <Image row="0" col="1" src="~/img/curlyGirl.jpg" class="profile-img" shadow="3"></Image>
                 </GridLayout>
                 <ScrollView row="1" orientation="horizontal" scrollBarIndicatorVisible="false" paddingRight="15">
                     <!-- <StackLayout orientation="horizontal">
@@ -22,11 +22,11 @@
                     <StackLayout orientation="horizontal">
                         <GridLayout rows="*" columns="*" class="genre-tiles g1">
                             <Image row="0" col="0" src="~/img/sciencefiction.png" width="145"></Image>
-                            <Label row="0" col="0" text="SCIENCE FICTION" horizontalAlignment="center" verticalAlignment="center" class="mt fs14 ls"></Label>
+                            <Label row="0" col="0" text="SCIENCE FICTION_5" horizontalAlignment="center" verticalAlignment="center" class="mt fs14 ls" (tap)=GetBookByGenre(5)></Label>
                         </GridLayout>
                         <GridLayout rows="*" columns="*" class="genre-tiles">
                             <Image row="0" col="0" src="~/img/rock.png" width="300"></Image>
-                            <Label row="0" col="0" text="ROCK" horizontalAlignment="center" verticalAlignment="center" class="mt fs14 ls"></Label>
+                            <Label row="0" col="0" text="ROCK_22" horizontalAlignment="center" verticalAlignment="center" class="mt fs14 ls" (tap)=GetBookByGenre(22)></Label>
                         </GridLayout>
                         <GridLayout rows="*" columns="*" class="genre-tiles g3">
                             <Image row="0" col="0" src="~/img/classic.png" width="300"></Image>

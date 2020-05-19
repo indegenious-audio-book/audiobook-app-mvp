@@ -1,0 +1,31 @@
+<GridLayout class="genre-window" rows="*" columns="*" #bg>
+    <!-- <GridLayout class="header" row="0" rows="*" columns="*, auto" padding="15">
+        <Label row="0" col="0" text="GENRE" class="title sf"></Label>
+        <Image row="0" col="1" src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=d74712e9b31ac943d46541e6e6ed559f&auto=format&fit=crop&w=800&q=80" class="profile-img" shadow="3"></Image>
+    </GridLayout> -->
+    <!-- <ScrollView scrollBarIndicatorVisible="false">
+        <StackLayout class="genres-list" *ngFor="let genre of genres">
+            <GridLayout rows="auto, auto" columns="*, auto" margin="15 15 0 15" paddingBottom="15">
+                <Label row="0" col="0" class="sfl fs18 w" [text]="genre.genre" paddingBottom="8"></Label>
+                <Label row="1" col="0" class="sfl fs14 fw100 w" text="Camila Cabello"></Label>
+                <Label row="0" col="1" text="g" rowSpan="2" class="icoPB"></Label>
+            </GridLayout>
+            <Label text="" class="border-b" height="1"></Label>
+
+        </StackLayout>
+    </ScrollView> -->
+    <GridLayout rows="*" columns="*" padding="15">
+        <ListView [items]="genres" row="1" class="list-group">
+            <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
+                <!-- The item template can only have a single root view container (e.g. GridLayout, StackLayout, etc.)-->
+                <GridLayout class="list-group-item" rows="*" columns="auto, *">
+                    <!-- <Label [text]="item.genre" class="sfl fs18 w"></Label> -->
+                    <!-- <Image row="0" col="0" src="" class="thumb img-circle"></Image> -->
+                    <Label verticalAlignment="center" row="0" col="0" text="e" class="icoPB bt2" padding="20 0" fontSize="32" textAlignment="center"></Label>
+                    <Label [text]="item.genre" row="0" col="1" (tap)="getBooksByGenre(item.genre)"></Label>
+                </GridLayout>
+            </ng-template>
+        </ListView>
+    </GridLayout>
+
+</GridLayout>
