@@ -8,6 +8,7 @@ import { knownFolders } from "tns-core-modules/file-system/file-system";
 import { ActivatedRoute } from "@angular/router";
 import { BookService } from "../book/book.service";
 import { ChapterEntity, Chapter } from "../data/book.model";
+import { Observable } from "@nativescript/core/data/observable";
 
 @Component({
     selector: "Browse",
@@ -19,6 +20,7 @@ export class BrowseComponent implements OnInit {
     selectedBook: any;
     trackDuration: number = 0;
     chapterList: Array<ChapterEntity>;
+    //@ObservableProperty() public remainingDuration;
     playIconFlag: string = "c";
     isPlaying: boolean = false;
     currentTrack: string = "";
@@ -57,6 +59,7 @@ export class BrowseComponent implements OnInit {
                         // iOS: duration is in seconds
                         // Android: duration is in milliseconds
                         this.trackDuration = (duration / 1000);
+                        //this._startDurationTracking(this.trackDuration);
                         console.log(`song duration:`, duration);
                     });
                 });
@@ -87,10 +90,6 @@ export class BrowseComponent implements OnInit {
         await this._player.dispose();
         this.isPlaying = false;
         this.playIconFlag = "c";
-    }
-
-    ngAfterViewInit() {
-        console.log("ngAfterViewInit Called");
     }
 
     goBack() {
@@ -132,4 +131,38 @@ export class BrowseComponent implements OnInit {
         // Android only: extra detail on error
         console.log("extra info on the error:", args.extra);
     }
+    // private async _startDurationTracking(duration) {
+    //     if (this._player && this._player.isAudioPlaying()) {
+    //         const timerId = timer.setInterval(() => {
+    //             this.remainingDuration = duration - this._player.currentTime;
+    //             // console.log(`this.remainingDuration = ${this.remainingDuration}`);
+    //         }, 1000);
+    //     }
+    // }
+}
+
+export function ObservableProperty() {
+    return (obj: Observable, key: string) => {
+        let storedValue = obj[key];
+
+        Object.defineProperty(obj, key, {
+            get: function () {
+                return storedValue;
+            },
+            set: function (value) {
+                if (storedValue === value) {
+                    return;
+                }
+                storedValue = value;
+                this.notify({
+                    eventName: Observable.propertyChangeEvent,
+                    propertyName: key,
+                    object: this,
+                    value
+                });
+            },
+            enumerable: true,
+            configurable: true
+        });
+    };
 }
