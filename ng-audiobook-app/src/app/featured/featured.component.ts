@@ -4,7 +4,8 @@ import * as app from "tns-core-modules/application";
 
 @Component({
     selector: "Featured",
-    templateUrl: "./featured.component.html"
+    templateUrl: "./featured.component.html",
+    moduleId: module.id
 })
 export class FeaturedComponent implements OnInit {
 
