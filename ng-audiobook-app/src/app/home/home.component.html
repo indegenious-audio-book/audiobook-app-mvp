@@ -30,7 +30,11 @@
                         </GridLayout>
                         <GridLayout rows="*" columns="*" class="genre-tiles g3">
                             <Image row="0" col="0" src="~/img/50-best-childrens-books.png" width="300"></Image>
-                            <Label row="0" col="0" text="Children" horizontalAlignment="center" verticalAlignment="center" class="mt fs14 ls"></Label>
+                            <Label row="0" col="0" text="Children" horizontalAlignment="center" verticalAlignment="center" class="mt fs14 ls" (tap)=GetBookByGenre(5)></Label>
+                        </GridLayout>
+                        <GridLayout rows="*" columns="*" class="genre-tiles g4">
+                            <Image row="0" col="0" src="~/img/50-best-childrens-books.png" width="300"></Image>
+                            <Label row="0" col="0" text="Children" horizontalAlignment="center" verticalAlignment="center" class="mt fs14 ls" (tap)=GetBookByGenre(5)></Label>
                         </GridLayout>
                     </StackLayout>
                 </ScrollView>
