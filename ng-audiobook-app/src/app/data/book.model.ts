@@ -25,7 +25,8 @@ export class Chapter {
 }
 export class ChapterEntity {
     chapter_id: number;
-    chapter_title: string;
+    chapter_title_english: string;
+    chapter_title_vernacular: string;
     book: number;
     chapter_url: string;
     chapter_number:number;
