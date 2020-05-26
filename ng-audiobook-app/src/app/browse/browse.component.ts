@@ -47,7 +47,7 @@ export class BrowseComponent implements OnInit {
         if (!this.isPlaying) {
             this.isPlaying = true;
             this.playIconFlag = "d";
-            this.currentTrack = chapter.chapter_title;
+            this.currentTrack = chapter.chapter_title_vernacular;
             this._player.playFromUrl({
                 audioFile: "http://34.93.249.161:9000/" + chapter.chapter_url,
                 loop: false,
