@@ -4,33 +4,22 @@
             <!-- header -->
             <GridLayout row="0" rows="*, *, *" class="header">
                 <GridLayout row="0" rows="*" columns="*, auto" padding="15">
-                    <Label row="0" col="0" text="EXPLORE" class="title sf"></Label>
+                    <Label row="0" col="0" text="GENRES" class="title sf"></Label>
                     <Image row="0" col="1" src="~/img/curlyGirl.jpg" class="profile-img" shadow="3"></Image>
                 </GridLayout>
                 <ScrollView row="1" orientation="horizontal" scrollBarIndicatorVisible="false" paddingRight="15">
-                    <!-- <StackLayout orientation="horizontal">
-                        <GridLayout class="header-tiles t1">
-                            <Label text="NEW ALBUMS" horizontalAlignment="center" verticalAlignment="center" class="mt fs14 ls"></Label>
-                        </GridLayout>
-                        <GridLayout class="header-tiles t2">
-                            <Label text="PLAYLISTS" horizontalAlignment="center" verticalAlignment="center" class="mt fs14 ls"></Label>
-                        </GridLayout>
-                        <GridLayout class="header-tiles t3">
-                            <Label text="TRACKS" horizontalAlignment="center" verticalAlignment="center" class="mt fs14 ls"></Label>
-                        </GridLayout>
-                    </StackLayout> -->
                     <StackLayout orientation="horizontal">
                         <GridLayout rows="*" columns="*" class="genre-tiles g1">
-                            <Image row="0" col="0" src="~/img/sciencefiction.png" width="145"></Image>
-                            <Label row="0" col="0" text="SCIENCE FICTION_5" horizontalAlignment="center" verticalAlignment="center" class="mt fs14 ls" (tap)=GetBookByGenre(5)></Label>
-                        </GridLayout>
-                        <GridLayout rows="*" columns="*" class="genre-tiles">
-                            <Image row="0" col="0" src="~/img/rock.png" width="300"></Image>
-                            <Label row="0" col="0" text="ROCK_22" horizontalAlignment="center" verticalAlignment="center" class="mt fs14 ls" (tap)=GetBookByGenre(22)></Label>
+                            <Image row="0" col="0" src="~/img/adventure.png" width="300"></Image>
+                            <Label row="0" col="0" text="Adventure" horizontalAlignment="center" verticalAlignment="center" class="mt fs14 ls" (tap)=GetBookByGenre(1)></Label>
                         </GridLayout>
                         <GridLayout rows="*" columns="*" class="genre-tiles g3">
-                            <Image row="0" col="0" src="~/img/classic.png" width="300"></Image>
-                            <Label row="0" col="0" text="CLASSICAL" horizontalAlignment="center" verticalAlignment="center" class="mt fs14 ls"></Label>
+                            <Image row="0" col="0" src="~/img/50-best-childrens-books.png" width="300"></Image>
+                            <Label row="0" col="0" text="" color="#191919" horizontalAlignment="center" verticalAlignment="center" class="mt fs14 ls" (tap)=GetBookByGenre(5)></Label>
+                        </GridLayout>
+                        <GridLayout rows="*" columns="*" class="genre-tiles g4">
+                            <Image row="0" col="0" src="~/img/drama.png" width="300"></Image>
+                            <Label row="0" col="0" text="" horizontalAlignment="center" verticalAlignment="center" class="mt fs14 ls" (tap)=GetBookByGenre(9)></Label>
                         </GridLayout>
                     </StackLayout>
                 </ScrollView>

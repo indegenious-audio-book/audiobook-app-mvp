@@ -25,8 +25,8 @@
             <ListView [items]="chapterList" row="1" class="list-group" height="600">
                 <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
                     <GridLayout rows="auto, auto" columns="*, auto" margin="15 15 0 15" paddingBottom="15" (tap)="playRemoteFile(item)">
-                        <Label row="0" col="0" class="sfl fs18 w" [text]="item.chapter_title" paddingBottom="8"></Label>
-                        <Label row="1" col="0" class="sfl fs14 fw100 w" [text]="item.chapter_title"></Label>
+                        <Label row="0" col="0" class="sfl fs18 w" [text]="item.chapter_title_vernacular" paddingBottom="8"></Label>
+                        <Label row="1" col="0" class="sfl fs14 fw100 w" [text]="item.chapter_title_english"></Label>
                         <Label row="0" col="1" text="g" rowSpan="2" class="icoPB"></Label>
                     </GridLayout>
                 </ng-template>

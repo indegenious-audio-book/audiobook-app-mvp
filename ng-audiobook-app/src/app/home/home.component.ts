@@ -29,14 +29,14 @@ export class HomeComponent implements OnInit {
 
         this.viewHeigth = screen.mainScreen.heightDIPs * 0.6;
 
-        this.genreService.getGenreList()
-            .subscribe((res: Genre) => {
-                console.log(res.results);
-                this.genres = res.results;
-            }, (err) => {
-                console.log(err);
-            });
-        console.log("Genre List" + this.genres);
+        // this.genreService.getGenreList()
+        //     .subscribe((res: Genre) => {
+        //         console.log(res.results);
+        //         this.genres = res.results;
+        //     }, (err) => {
+        //         console.log(err);
+        //     });
+        // console.log("Genre List" + this.genres);
     }
 
     goToArtist() {
