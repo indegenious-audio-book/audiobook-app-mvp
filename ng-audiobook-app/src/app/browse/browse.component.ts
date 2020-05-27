@@ -7,7 +7,7 @@ import { TNSPlayer } from "nativescript-audio";
 import { knownFolders } from "tns-core-modules/file-system/file-system";
 import { ActivatedRoute } from "@angular/router";
 import { BookService } from "../book/book.service";
-import { ChapterEntity, Chapter } from "../data/book.model";
+import { ChapterEntity, Chapter, BookEntity } from "../data/book.model";
 import { Observable } from "@nativescript/core/data/observable";
 
 @Component({
@@ -18,19 +18,21 @@ import { Observable } from "@nativescript/core/data/observable";
 })
 export class BrowseComponent implements OnInit {
     selectedBook: any;
+    imageUri: any;
     trackDuration: number = 0;
     chapterList: Array<ChapterEntity>;
+    bookEntity: BookEntity;
     //@ObservableProperty() public remainingDuration;
     playIconFlag: string = "c";
     isPlaying: boolean = false;
     currentTrack: string = "";
     @ViewChild("bg", { static: false }) gridlayout: ElementRef;
     private _player: TNSPlayer;
+    // tslint:disable-next-line:max-line-length
     constructor(private router: RouterExtensions, private page: Page, private routeParams: ActivatedRoute, private bookService: BookService) {
         // Use the component constructor to inject providers.
         this._player = new TNSPlayer();
         this._player.debug = true;
-
     }
 
     ngOnInit(): void {
@@ -41,6 +43,10 @@ export class BrowseComponent implements OnInit {
         console.log(this.selectedBook);
         this.bookService.getBooksBychapter(this.selectedBook).subscribe((res: Chapter) => {
             this.chapterList = res.results;
+        });
+        this.bookService.getBook(this.selectedBook).subscribe((res: BookEntity) => {
+            this.imageUri = res.thumbnail_url;
+            console.log(`image uri`, this.imageUri);
         });
     }
     async playRemoteFile(chapter: ChapterEntity) {
