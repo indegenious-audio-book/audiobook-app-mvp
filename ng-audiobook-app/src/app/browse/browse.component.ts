@@ -78,26 +78,26 @@ export class BrowseComponent implements OnInit {
         }
     }
 
-    async PlayLocalFile() {
-        const audioFolder = knownFolders.currentApp().getFolder("audio");
-        console.log(audioFolder);
-        const recordedFile = audioFolder.getFile(`ep1.mp3`);
-        console.log(recordedFile);
-        // const localFile = localFolder.getFile(`${args.object.audioId.toString()}.mp3`);
-        this._player.playFromFile({
-            audioFile: recordedFile.path,
-            loop: false,
-            completeCallback: this._trackComplete.bind(this),
-            errorCallback: this._trackError.bind(this)
-        })
-            .then(() => {
-                this._player.getAudioTrackDuration().then((duration) => {
-                    // iOS: duration is in seconds
-                    // Android: duration is in milliseconds
-                    console.log(`song duration:`, duration);
-                });
-            });
-    }
+    // async PlayLocalFile() {
+    //     const audioFolder = knownFolders.currentApp().getFolder("audio");
+    //     console.log(audioFolder);
+    //     const recordedFile = audioFolder.getFile(`ep1.mp3`);
+    //     console.log(recordedFile);
+    //     // const localFile = localFolder.getFile(`${args.object.audioId.toString()}.mp3`);
+    //     this._player.playFromFile({
+    //         audioFile: recordedFile.path,
+    //         loop: false,
+    //         completeCallback: this._trackComplete.bind(this),
+    //         errorCallback: this._trackError.bind(this)
+    //     })
+    //         .then(() => {
+    //             this._player.getAudioTrackDuration().then((duration) => {
+    //                 // iOS: duration is in seconds
+    //                 // Android: duration is in milliseconds
+    //                 console.log(`song duration:`, duration);
+    //             });
+    //         });
+    // }
     async stopPlaying() {
         await this._player.dispose();
         this.isPlaying = false;
@@ -105,6 +105,10 @@ export class BrowseComponent implements OnInit {
     }
 
     goBack() {
+        // right now stopping the player when you go remote.
+        // but we need to make this stop the player when the app exits.
+        this.stopPlaying(); // TODO remove this in a future release
+
         this.router.back();
     }
 
