@@ -64,7 +64,8 @@ export class BrowseComponent implements OnInit {
                     this._player.getAudioTrackDuration().then((duration: any) => {
                         // iOS: duration is in seconds
                         // Android: duration is in milliseconds
-                        this.trackDuration = (duration / 1000);
+                        // for android need to convert to minutes
+                        this.trackDuration = (duration / 60000);
                         //this._startDurationTracking(this.trackDuration);
                         console.log(`song duration:`, duration);
                     });
