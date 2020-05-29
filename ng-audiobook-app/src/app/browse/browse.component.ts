@@ -9,6 +9,7 @@ import { ActivatedRoute } from "@angular/router";
 import { BookService } from "../book/book.service";
 import { ChapterEntity, Chapter, BookEntity, Book } from "../data/book.model";
 import { Observable } from "@nativescript/core/data/observable";
+import { isAndroid, isIOS } from "tns-core-modules/ui/page";
 
 @Component({
     selector: "Browse",
@@ -65,7 +66,11 @@ export class BrowseComponent implements OnInit {
                         // iOS: duration is in seconds
                         // Android: duration is in milliseconds
                         // for android need to convert to minutes
-                        this.trackDuration = (duration / 60000);
+                        if (isAndroid) {
+                            this.trackDuration = (duration / 60000);
+                        } else if (isIOS) {
+                            this.trackDuration = (duration / 60);
+                        }
                         //this._startDurationTracking(this.trackDuration);
                         console.log(`song duration:`, duration);
                     });
