@@ -7,7 +7,7 @@ import { TNSPlayer } from "nativescript-audio";
 import { knownFolders } from "tns-core-modules/file-system/file-system";
 import { ActivatedRoute } from "@angular/router";
 import { BookService } from "../book/book.service";
-import { ChapterEntity, Chapter, BookEntity } from "../data/book.model";
+import { ChapterEntity, Chapter, BookEntity, Book } from "../data/book.model";
 import { Observable } from "@nativescript/core/data/observable";
 
 @Component({
@@ -21,7 +21,6 @@ export class BrowseComponent implements OnInit {
     imageUri: any;
     trackDuration: number = 0;
     chapterList: Array<ChapterEntity>;
-    bookEntity: BookEntity;
     //@ObservableProperty() public remainingDuration;
     playIconFlag: string = "c";
     isPlaying: boolean = false;
@@ -45,8 +44,9 @@ export class BrowseComponent implements OnInit {
             this.chapterList = res.results;
         });
         this.bookService.getBook(this.selectedBook).subscribe((res: BookEntity) => {
-            this.imageUri = res.thumbnail_url;
-            console.log(`image uri`, this.imageUri);
+            const thumbnail_url: string = res.thumbnail_url;
+            console.log(`image uri`, thumbnail_url);
+            this.imageUri = "http://34.93.249.161:9000/thumbnails/" + thumbnail_url ;
         });
     }
     async playRemoteFile(chapter: ChapterEntity) {

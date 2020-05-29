@@ -9,6 +9,8 @@ export class BookService {
         console.log("Book Service");
     }
     getBooksByGenre(id: number) {
+        console.log("getBooksByGenre is being passed with id:"+id);
+        
         return this._http.get("http://34.93.249.161:8000/api/v1/books/?genre="+id);
     }
 
@@ -17,6 +19,8 @@ export class BookService {
     }
 
     getBook(id: number) {
+        console.log(`getBook is being passed with id:${id}`);
+
         return this._http.get("http://34.93.249.161:8000/api/v1/books/"+id)
     }
 
