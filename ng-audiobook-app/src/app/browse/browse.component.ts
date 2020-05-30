@@ -3,6 +3,8 @@ import { RouterExtensions } from "nativescript-angular/router";
 import { Page } from "tns-core-modules/ui/page/page";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "tns-core-modules/application";
+// tslint:disable-next-line:no-duplicate-imports
+import { AndroidApplication, AndroidActivityBackPressedEventData } from "tns-core-modules/application";
 import { TNSPlayer } from "nativescript-audio";
 import { ActivatedRoute } from "@angular/router";
 import { BookService } from "../book/book.service";
@@ -21,6 +23,7 @@ export class BrowseComponent implements OnInit {
     selectedBook: any;
     imageUri: any;
     trackDuration: string = "0";
+    remainingDuration: number;
     chapterList: Array<ChapterEntity>;
     // @ObservableProperty() public remainingDuration;
     playIconFlag: string = "c";
@@ -49,6 +52,17 @@ export class BrowseComponent implements OnInit {
             console.log(`image uri`, thumbnail_url);
             this.imageUri = "http://34.93.249.161:9000/thumbnails/" + thumbnail_url ;
         });
+
+        // implementing back button
+        // TODO need to understand what to do for the IOS app.
+        if (isAndroid) {
+            app.android.on(
+                    AndroidApplication.activityBackPressedEvent,
+                    (data: AndroidActivityBackPressedEventData) => {
+                data.cancel = false; // do not override the default behaviour
+                this.stopPlaying();
+            });
+        }
     }
     async playRemoteFile(chapter: ChapterEntity) {
         if (this._player.isAudioPlaying()) {
@@ -72,10 +86,8 @@ export class BrowseComponent implements OnInit {
                         // Android: duration is in milliseconds
                         // for android need to convert to minutes
                         if (isAndroid) {
-                            // this.trackDuration = (duration / 60000);
                             this.trackDuration = this._msToTime(duration);
                         } else if (isIOS) {
-                            // this.trackDuration = (duration / 60);
                             this.trackDuration = String(duration / 60);
                         }
                         // this._startDurationTracking(this.trackDuration);
@@ -168,7 +180,7 @@ export class BrowseComponent implements OnInit {
     //     if (this._player && this._player.isAudioPlaying()) {
     //         const timerId = timer.setInterval(() => {
     //             this.remainingDuration = duration - this._player.currentTime;
-    //             // console.log(`this.remainingDuration = ${this.remainingDuration}`);
+    //             console.log(`this.remainingDuration = ${this.remainingDuration}`);
     //         }, 1000);
     //     }
     // }
