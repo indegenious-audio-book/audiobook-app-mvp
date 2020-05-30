@@ -42,7 +42,7 @@ export class BrowseComponent implements OnInit {
         // Init your component properties here.
         this.page.actionBarHidden = true;
         this.routeParams.params
-            .forEach((params) => { this.selectedBook = +params["BookSelected"]; });
+            .forEach((params) => { this.selectedBook = +params.BookSelected; });
         console.log(this.selectedBook);
         this.bookService.getBooksBychapter(this.selectedBook).subscribe((res: Chapter) => {
             this.chapterList = res.results;
@@ -61,6 +61,7 @@ export class BrowseComponent implements OnInit {
                     (data: AndroidActivityBackPressedEventData) => {
                 data.cancel = false; // do not override the default behaviour
                 this.stopPlaying();
+                // this.goBack();
             });
         }
     }
@@ -118,6 +119,7 @@ export class BrowseComponent implements OnInit {
     //         });
     // }
     async stopPlaying() {
+        console.log("Tales App - stopping player");
         await this._player.dispose();
         this.isPlaying = false;
         this.playIconFlag = "c";
@@ -132,7 +134,7 @@ export class BrowseComponent implements OnInit {
     }
 
     blurImg() {
-        console.log("Blur Image func called");
+        console.log("Tales App - Blur Image func called");
     }
     onDrawerButtonTap(): void {
         const sideDrawer = <RadSideDrawer>app.getRootView();
@@ -155,7 +157,7 @@ export class BrowseComponent implements OnInit {
                 this._player.play();
                 this.playIconFlag = "d";
             } else {
-                console.log("will try to play the first chapter.");
+                console.log("Tales App - will try to play the first chapter.");
                 if (Array.isArray(this.chapterList) && this.chapterList.length) {
                     this.playRemoteFile(this.chapterList[0]);
                 }
@@ -165,16 +167,16 @@ export class BrowseComponent implements OnInit {
 
     private _trackComplete(args: any) {
         this.isPlaying = false;
-        console.log("reference back to player:", args.player);
+        console.log("Tales App - reference back to player:", args.player);
         // iOS only: flag indicating if completed succesfully
-        console.log("whether song play completed successfully:", args.flag);
+        console.log("Tales App - whether song play completed successfully:", args.flag);
     }
     private _trackError(args: any) {
         this.isPlaying = false;
-        console.log("reference back to player:", args.player);
-        console.log("the error:", args.error);
+        console.log("Tales App - reference back to player:", args.player);
+        console.log("Tales App - the error:", args.error);
         // Android only: extra detail on error
-        console.log("extra info on the error:", args.extra);
+        console.log("Tales App - extra info on the error:", args.extra);
     }
     // private async _startDurationTracking(duration) {
     //     if (this._player && this._player.isAudioPlaying()) {
