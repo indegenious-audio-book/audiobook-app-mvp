@@ -6,11 +6,11 @@
 <GridLayout rows="*" columns="*" class="book-parent-window">
     <!-- <StackLayout> -->
     <ListView [items]="books" row="1" class="list-group" scrollDirection="Vertical">
-        <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
+        <ng-template nsTemplateKey="template" let-item="item" let-i="index" let-odd="odd" let-even="even">
             <!-- The item template can only have a single root view container (e.g. GridLayout, StackLayout, etc.)-->
             <!-- <GridLayout class="list-group-item" rows="*" columns="*,auto" class="book-list-item"> -->
             <GridLayout class="list-group-item" rows="*" columns="*,auto">
-                <Image row="0" col="0" src="~/img/curlyGirl.jpg" class="thumb img-rounded" ></Image>
+                <Image row="0" col="0" src="~/img/curlyGirl.jpg" decodeWidth="400" decodeHeight="400" loadMode="async" ></Image>
                 <StackLayout row="0" col="1" (tap)="playBookByBookId(item.book_id)" >
                     <!-- <Label [text]="item.book_title" class="list-group-item-heading" ></Label> -->
                     <Label [text]="item.book_title" class="list-group-item-text" color="#191919" textWrap="true" ></Label>
@@ -19,6 +19,16 @@
                 <!-- <Label row="0" col="0" class="sfl fs18 w" [text]="item.book_title" class="list-group-item-text" color="#191919" textWrap="true" width="100%" (tap)="playBookByBookId(item.book_id)"></Label> -->
             </GridLayout>
         </ng-template>
+        <!-- <ng-template nsTemplateKey="skeleton" >
+            <GridLayout class="list-group-item skeleton" rows="*" columns="*,auto">
+                <Image row="0" col="0" src="~/img/curlyGirl.jpg" class="thumb img-rounded" ></Image>
+                <StackLayout row="0" col="1" >
+                    <Label [text]="item.book_title" class="list-group-item-text skeleton" ></Label>
+                </StackLayout> -->
+                <!-- <Label row="0" col="1" class="sfl fs18 w" [text]="item.book_title" class="list-group-item-heading" (tap)="playBookByBookId(item.book_id)"></Label> -->
+                <!-- <Label row="0" col="0" class="sfl fs18 w" [text]="item.book_title" class="list-group-item-text" color="#191919" textWrap="true" width="100%" (tap)="playBookByBookId(item.book_id)"></Label> -->
+            <!-- </GridLayout>
+        </ng-template> -->
     </ListView>
 
     <!-- </StackLayout> -->

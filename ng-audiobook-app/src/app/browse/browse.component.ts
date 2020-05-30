@@ -9,6 +9,7 @@ import { BookService } from "../book/book.service";
 import { ChapterEntity, Chapter, BookEntity, Book } from "../data/book.model";
 import { Observable } from "@nativescript/core/data/observable";
 import { isAndroid, isIOS } from "tns-core-modules/ui/page";
+import { Slider } from "tns-core-modules/ui/slider/slider";
 
 @Component({
     selector: "Browse",
@@ -123,6 +124,12 @@ export class BrowseComponent implements OnInit {
         const sideDrawer = <RadSideDrawer>app.getRootView();
         sideDrawer.showDrawer();
     }
+    
+    // onSliderValueChange(args) {
+    //     const newValue = <Slider>args.newValue;
+    //     this._player.currentTime = newValue;
+    //     console.log(`Slider new value ${args.value}`);
+    // }
 
     togglePlay() {
         if (this._player.isAudioPlaying()) {
