@@ -20,9 +20,9 @@ import { Slider } from "tns-core-modules/ui/slider/slider";
 export class BrowseComponent implements OnInit {
     selectedBook: any;
     imageUri: any;
-    trackDuration: number = 0;
+    trackDuration: string = "0";
     chapterList: Array<ChapterEntity>;
-    //@ObservableProperty() public remainingDuration;
+    // @ObservableProperty() public remainingDuration;
     playIconFlag: string = "c";
     isPlaying: boolean = false;
     currentTrack: string = "";
@@ -72,11 +72,13 @@ export class BrowseComponent implements OnInit {
                         // Android: duration is in milliseconds
                         // for android need to convert to minutes
                         if (isAndroid) {
-                            this.trackDuration = (duration / 60000);
+                            // this.trackDuration = (duration / 60000);
+                            this.trackDuration = this._msToTime(duration);
                         } else if (isIOS) {
-                            this.trackDuration = (duration / 60);
+                            // this.trackDuration = (duration / 60);
+                            this.trackDuration = String(duration / 60);
                         }
-                        //this._startDurationTracking(this.trackDuration);
+                        // this._startDurationTracking(this.trackDuration);
                         console.log(`song duration:`, duration);
                     });
                 });
@@ -170,6 +172,21 @@ export class BrowseComponent implements OnInit {
     //         }, 1000);
     //     }
     // }
+    private _msToTime(duration) {
+        const seconds = Math.floor((duration / 1000) % 60);
+        const minutes = Math.floor((duration / (1000 * 60)) % 60);
+        const hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+      
+        const hoursStr = (hours < 10) ? "0" + hours : hours;
+        const minutesStr = (minutes < 10) ? "0" + minutes : minutes;
+        const secondsStr = (seconds < 10) ? "0" + seconds : seconds;
+      
+        if (hours === 0) {
+            return minutesStr + ":" + secondsStr;
+        } else {
+            return hoursStr + ":" + minutesStr + ":" + secondsStr;
+        }
+      }
 }
 
 export function ObservableProperty() {
