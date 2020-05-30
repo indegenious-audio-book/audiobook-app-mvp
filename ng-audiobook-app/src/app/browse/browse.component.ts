@@ -4,7 +4,6 @@ import { Page } from "tns-core-modules/ui/page/page";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "tns-core-modules/application";
 import { TNSPlayer } from "nativescript-audio";
-import { knownFolders } from "tns-core-modules/file-system/file-system";
 import { ActivatedRoute } from "@angular/router";
 import { BookService } from "../book/book.service";
 import { ChapterEntity, Chapter, BookEntity, Book } from "../data/book.model";
@@ -51,6 +50,11 @@ export class BrowseComponent implements OnInit {
         });
     }
     async playRemoteFile(chapter: ChapterEntity) {
+        if (this._player.isAudioPlaying()) {
+            this._player.pause();
+            this.playIconFlag = "d";
+            this.isPlaying = false;
+        }
         if (!this.isPlaying) {
             this.isPlaying = true;
             this.playIconFlag = "d";
@@ -129,8 +133,12 @@ export class BrowseComponent implements OnInit {
             if (this.currentTrack !== "") {
                 this._player.play();
                 this.playIconFlag = "d";
+            } else {
+                console.log("will try to play the first chapter.");
+                if (Array.isArray(this.chapterList) && this.chapterList.length) {
+                    this.playRemoteFile(this.chapterList[0]);
+                }
             }
-
         }
     }
 
