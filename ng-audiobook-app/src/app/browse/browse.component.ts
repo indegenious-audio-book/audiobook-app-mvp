@@ -22,10 +22,11 @@ import { Slider } from "tns-core-modules/ui/slider/slider";
 export class BrowseComponent implements OnInit {
     selectedBook: any;
     imageUri: any;
-    trackDurationNumberView: string = "0";
+    trackDurationNumberView: string = "00:00";
     chapterList: Array<ChapterEntity>;
     _slider: Slider;
-    currentTimeView: string;
+    currentTimeView: string = "00:00";
+    currentTime: number;
     
     // @ObservableProperty() remainingDuration: number;
     
@@ -37,7 +38,6 @@ export class BrowseComponent implements OnInit {
     private timer: number ;
     private _player: TNSPlayer;
     private remainingDuration: number;
-    private currentTime: number;
     
     // tslint:disable-next-line:max-line-length
     constructor(private router: RouterExtensions, private page: Page, private routeParams: ActivatedRoute, private bookService: BookService) {
