@@ -22,20 +22,29 @@ import { Slider } from "tns-core-modules/ui/slider/slider";
 export class BrowseComponent implements OnInit {
     selectedBook: any;
     imageUri: any;
-    trackDuration: string = "0";
-    remainingDuration: number;
+    trackDurationNumberView: string = "0";
     chapterList: Array<ChapterEntity>;
-    // @ObservableProperty() public remainingDuration;
+    _slider: Slider;
+    currentTimeView: string;
+    
+    // @ObservableProperty() remainingDuration: number;
+    
     playIconFlag: string = "c";
     isPlaying: boolean = false;
     currentTrack: string = "";
     @ViewChild("bg", { static: false }) gridlayout: ElementRef;
+
+    private timer: number ;
     private _player: TNSPlayer;
+    private remainingDuration: number;
+    private currentTime: number;
+    
     // tslint:disable-next-line:max-line-length
     constructor(private router: RouterExtensions, private page: Page, private routeParams: ActivatedRoute, private bookService: BookService) {
         // Use the component constructor to inject providers.
         this._player = new TNSPlayer();
         this._player.debug = true;
+        this._slider = page.getViewById("player") as Slider;
     }
 
     ngOnInit(): void {
@@ -87,13 +96,15 @@ export class BrowseComponent implements OnInit {
                         // Android: duration is in milliseconds
                         // for android need to convert to minutes
                         if (isAndroid) {
-                            this.trackDuration = this._msToTime(duration);
+                            this.trackDurationNumberView = this._msToTime(duration);
                         } else if (isIOS) {
-                            this.trackDuration = String(duration / 60);
+                            this.trackDurationNumberView = String(duration / 60);
                         }
-                        // this._startDurationTracking(this.trackDuration);
+                        this._startDurationTracking(duration);
+                        // console.log(`promise: ${promise}`);
                         console.log(`song duration:`, duration);
                     });
+                    // this._startDurationTracking();
                 });
         }
     }
@@ -123,6 +134,7 @@ export class BrowseComponent implements OnInit {
         await this._player.dispose();
         this.isPlaying = false;
         this.playIconFlag = "c";
+        clearInterval(this.timer);
     }
 
     goBack() {
@@ -178,14 +190,21 @@ export class BrowseComponent implements OnInit {
         // Android only: extra detail on error
         console.log("Tales App - extra info on the error:", args.extra);
     }
-    // private async _startDurationTracking(duration) {
-    //     if (this._player && this._player.isAudioPlaying()) {
-    //         const timerId = timer.setInterval(() => {
-    //             this.remainingDuration = duration - this._player.currentTime;
-    //             console.log(`this.remainingDuration = ${this.remainingDuration}`);
-    //         }, 1000);
-    //     }
-    // }
+    private async _startDurationTracking(duration) {
+        console.log("inside duration tracking");
+        this.remainingDuration = 0;
+        if (this._player && this._player.isAudioPlaying()) {
+            // console.log("inside duration tracking");
+            this.timer = setInterval(() => {
+                // console.log(`_startDurationTracking: duration is ${duration}`);
+                // console.log(`_startDurationTracking: current time is ${this._player.currentTime}`);
+                this.currentTime = this._player.currentTime;
+                this.remainingDuration = duration - this.currentTime;
+                this.currentTimeView = this._msToTime(this.currentTime);
+                console.log(`this.remainingDuration = ${this.remainingDuration}`);
+            }, 1000);
+        }
+    }
     private _msToTime(duration) {
         const seconds = Math.floor((duration / 1000) % 60);
         const minutes = Math.floor((duration / (1000 * 60)) % 60);

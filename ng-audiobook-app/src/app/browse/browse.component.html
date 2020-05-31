@@ -7,10 +7,10 @@
             <Label [text]="currentTrack" class="song-title mt" fontWeight="400" padding="40 0 30 0" horizontalAlignment="center"></Label>
             <GridLayout columns="*, *" rows="auto, auto" margin="0 40">
                 <GridLayout col="0" row="0" columns="*" rows="auto" colSpan="2">
-                    <Slider col="0" row="0" value="10" minValue="0" [maxValue]="trackDuration" backgroundColor="white" color="white"></Slider>
+                    <Slider col="0" row="0" id="player" [value]="currentTime" minValue="0" [maxValue]="trackDuration" backgroundColor="white" color="white"></Slider>
                 </GridLayout>
-                <Label row="1" col="0" text="0:00" class="sfl fw100 w" fontSize="13" horizontalAlignment="left"></Label>
-                <Label row="1" col="1" [text]="trackDuration" class="sfl fw100 w" fontSize="13" horizontalAlignment="right"></Label>
+                <Label row="1" col="0" [text]="currentTimeView" class="sfl fw100 w" fontSize="13" horizontalAlignment="left"></Label>
+                <Label row="1" col="1" [text]="trackDurationNumberView" class="sfl fw100 w" fontSize="13" horizontalAlignment="right" ></Label>
             </GridLayout>
             <GridLayout columns="*, *, *, *, *" rows="100" padding="20 15 10 19">
                 <Label verticalAlignment="center" row="0" col="0" text="f" class="icoPB" fontSize="" textAlignment="center"></Label>
