@@ -44,7 +44,7 @@ export class BrowseComponent implements OnInit {
         // Use the component constructor to inject providers.
         this._player = new TNSPlayer();
         this._player.debug = true;
-        this._slider = page.getViewById("player") as Slider;
+        // this._slider = page.getViewById("player") as Slider;
     }
 
     ngOnInit(): void {
@@ -201,6 +201,7 @@ export class BrowseComponent implements OnInit {
                 this.currentTime = this._player.currentTime;
                 this.remainingDuration = duration - this.currentTime;
                 this.currentTimeView = this._msToTime(this.currentTime);
+                // this._slider.value = this.currentTime;
                 console.log(`this.remainingDuration = ${this.remainingDuration}`);
             }, 1000);
         }

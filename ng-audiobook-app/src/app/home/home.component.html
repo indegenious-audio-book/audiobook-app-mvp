@@ -72,27 +72,37 @@
                 <!-- PLAYLISTS -->
                 <Label text="TITLES" class="p15 sf fw800" color="#374064"></Label>
                 <ScrollView scrollBarIndicatorVisible="false" orientation="horizontal">
-                    <StackLayout orientation="horizontal" paddingBottom="15" paddingRight="15">
-                        <GridLayout rows="*, *" columns="*, *" width="155" marginLeft="15" borderRadius="8">
-                            <Image row="0" col="0" src="~/img/playlist1/1.png"></Image>
-                            <Image row="0" col="1" src="~/img/playlist1/2.png"></Image>
-                            <Image row="1" col="0" src="~/img/playlist1/3.png"></Image>
-                            <Image row="1" col="1" src="~/img/playlist1/4.png"></Image>
-                        </GridLayout>
-                        <GridLayout rows="*, *" columns="*, *" width="155" marginLeft="15" borderRadius="8">
-                            <Image row="0" col="0" src="~/img/playlist2/1.png"></Image>
-                            <Image row="0" col="1" src="~/img/playlist2/2.png"></Image>
-                            <Image row="1" col="0" src="~/img/playlist2/3.png"></Image>
-                            <Image row="1" col="1" src="~/img/playlist2/4.png"></Image>
-                        </GridLayout>
-                        <AbsoluteLayout borderRadius="8">
-                            <GridLayout rows="*, *" columns="*, *" width="155" marginLeft="15">
-                                <Image row="0" col="0" src="~/img/playlist3/1.png"></Image>
-                                <Image row="0" col="1" src="~/img/playlist3/2.png"></Image>
-                                <Image row="1" col="0" src="~/img/playlist3/3.png"></Image>
-                                <Image row="1" col="1" src="~/img/playlist3/4.png"></Image>
+                    <StackLayout orientation="horizontal" paddingRight="15">
+                        <GridLayout rows="*" columns="*" width="170" paddingLeft="15" (tap)="goToArtist()">
+                            <Image row="0" col="0" [src]="imageUri1"></Image>
+                            <GridLayout row="0" col="0" rows="90, 60" columns="*" verticalAlignment="bottom">
+                                <Image row="0" col="0" src="~/img/btn1.png" verticalAlignment="top" width="45" horizontalAlignment="right" marginRight="10" marginTop="5"></Image>
+                                <GridLayout rows="*, *" columns="*" row="1">
+                                    <Label row="0" col="0" [text]="latestBooks1.book_title" color="white" class="fs12 fw800 mt" paddingTop="16" horizontalAlignment="center"></Label>
+                                    <Label row="1" col="0" text="25 TRACKS" class="fs10 mt" color="white" horizontalAlignment="center"></Label>
+                                </GridLayout>
                             </GridLayout>
-                        </AbsoluteLayout>
+                        </GridLayout>
+                        <GridLayout rows="*" columns="*" width="170" paddingLeft="15">
+                            <Image src="~/img/drake.png"></Image>
+                            <GridLayout row="0" col="0" rows="90, 60" columns="*" verticalAlignment="bottom">
+                                <Image row="0" col="0" src="~/img/btn2.png" verticalAlignment="top" width="45" horizontalAlignment="right" marginRight="10" marginTop="5"></Image>
+                                <GridLayout rows="*, *" columns="*" row="1">
+                                    <Label row="0" col="0" [text]="latestBooks1.book_title" color="white" class="fs12 fw800 mt" paddingTop="16" horizontalAlignment="center"></Label>
+                                    <Label row="1" col="0" text="48 TRACKS" class="fs10 mt" color="white" horizontalAlignment="center"></Label>
+                                </GridLayout>
+                            </GridLayout>
+                        </GridLayout>
+                        <GridLayout rows="*" columns="*" width="170" paddingLeft="15">
+                            <Image src="~/img/beyonce.png"></Image>
+                            <GridLayout row="0" col="0" rows="90, 60" columns="*" verticalAlignment="bottom">
+                                <Image row="0" col="0" src="~/img/btn3.png" verticalAlignment="top" width="45" horizontalAlignment="right" marginRight="10" marginTop="5"></Image>
+                                <GridLayout rows="*, *" columns="*" row="1">
+                                    <Label row="0" col="0" [text]="latestBooks1.book_title" color="white" class="fs12 fw800 mt" paddingTop="16" horizontalAlignment="center"></Label>
+                                    <Label row="1" col="0" text="124 TRACKS" class="fs10 mt" color="white" horizontalAlignment="center"></Label>
+                                </GridLayout>
+                            </GridLayout>
+                        </GridLayout>
                     </StackLayout>
                 </ScrollView>
             </StackLayout>
