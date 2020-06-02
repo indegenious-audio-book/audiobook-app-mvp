@@ -9,11 +9,32 @@ export class BookService {
         console.log("Book Service");
     }
     getBooksByGenre(id: number) {
+        console.log("getBooksByGenre is being passed with id:"+id);
+        
         return this._http.get("http://34.93.249.161:8000/api/v1/books/?genre="+id);
     }
 
     getBooksBychapter(id: number) {
         return this._http.get("http://34.93.249.161:8000/api/v1/chapters/?book="+id);
+    }
+
+    getBook(id: number) {
+        console.log(`getBook is being passed with id:${id}`);
+
+        return this._http.get("http://34.93.249.161:8000/api/v1/books/"+id);
+    }
+
+    getBookHomeView() {
+        console.log("get book home view is being called");
+        
+        return this._http.get("http://34.93.249.161:8000/api/v1/books");
+    }
+
+    getLatestBooks() {
+        console.log("get getLatestBooks is being called");
+        
+        return this._http.get(
+            "http://34.93.249.161:8000/api/v1/books/?latest=3");
     }
 
 }
