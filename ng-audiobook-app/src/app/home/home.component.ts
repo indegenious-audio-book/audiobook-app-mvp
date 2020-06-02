@@ -25,6 +25,8 @@ export class HomeComponent implements OnInit {
     latestBooks2: BookEntity;
     latestBooks3: BookEntity;
     imageUri1: string;
+    imageUri2: string;
+    imageUri3: string;
 
     constructor(private bookService: BookService, private router: RouterExtensions, private page: Page) {
         // Use the component constructor to inject providers.
@@ -55,22 +57,20 @@ export class HomeComponent implements OnInit {
 
         this.bookService.getLatestBooks()
             .subscribe((res: Book) => {
-                this.latestBooks = res.results;
-                this.latestBooks1 = this.latestBooks[0];
-
-                this.latestBooks2 = this.latestBooks[1];
-                this.latestBooks3 = this.latestBooks[2];
-                const thumbnail_url: string = this.latestBooks1.thumbnail_url;
-                console.log(`image uri`, thumbnail_url);
-                this.imageUri1 = "http://34.93.249.161:9000/thumbnails/" + thumbnail_url ;
-                console.log("latest Book list" + this.latestBooks);
-                console.log(`res results ${res.results}`);
-                console.log(res);
-                console.log(`latest book output ${this.latestBooks}`);
+                this.setTitlesResources(res.results);
             }, (err) => {
                 console.log(err);
             });
         
+    }
+
+    setTitlesResources(latestBooks) {
+        this.latestBooks1 = latestBooks[0];
+        this.latestBooks2 = latestBooks[1];
+        this.latestBooks3 = latestBooks[2];
+        this.imageUri1 = "http://34.93.249.161:9000/thumbnails/" + this.latestBooks1.thumbnail_url ;
+        this.imageUri2 = "http://34.93.249.161:9000/thumbnails/" + this.latestBooks2.thumbnail_url ;
+        this.imageUri3 = "http://34.93.249.161:9000/thumbnails/" + this.latestBooks3.thumbnail_url ;
     }
 
     goToArtist() {
@@ -87,5 +87,9 @@ export class HomeComponent implements OnInit {
         console.log("nbn");
         console.log(genreId);
         this.router.navigate(["book", {id: genreId }]);
+    }
+    playBookByBookId(bookId: number) {
+        console.log(bookId);
+        this.router.navigate(["browse", {BookSelected: bookId }]);
     }
 }
