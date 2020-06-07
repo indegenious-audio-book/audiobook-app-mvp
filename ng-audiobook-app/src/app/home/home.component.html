@@ -37,8 +37,8 @@
                 <Label text="AUTHORS" class="p15 sf fw800" color="#374064"></Label>
                 <ScrollView scrollBarIndicatorVisible="false" orientation="horizontal">
                     <StackLayout orientation="horizontal" paddingRight="15">
-                        <GridLayout rows="*" columns="*" width="170" paddingLeft="15" (tap)="goToArtist()">
-                            <Image row="0" col="0" src="~/img/camila.png"></Image>
+                        <GridLayout rows="*" columns="*" width="170" paddingLeft="15" >
+                            <Image row="0" col="0" [src]="authorImage1"></Image>
                             <GridLayout row="0" col="0" rows="90, 60" columns="*" verticalAlignment="bottom">
                                 <Image row="0" col="0" src="~/img/btn1.png" verticalAlignment="top" width="45" horizontalAlignment="right" marginRight="10" marginTop="5"></Image>
                                 <GridLayout rows="*, *" columns="*" row="1">
@@ -48,7 +48,7 @@
                             </GridLayout>
                         </GridLayout>
                         <GridLayout rows="*" columns="*" width="170" paddingLeft="15">
-                            <Image src="~/img/drake.png"></Image>
+                            <Image [src]="authorImage2"></Image>
                             <GridLayout row="0" col="0" rows="90, 60" columns="*" verticalAlignment="bottom">
                                 <Image row="0" col="0" src="~/img/btn2.png" verticalAlignment="top" width="45" horizontalAlignment="right" marginRight="10" marginTop="5"></Image>
                                 <GridLayout rows="*, *" columns="*" row="1">
@@ -57,7 +57,7 @@
                                 </GridLayout>
                             </GridLayout>
                         </GridLayout>
-                        <GridLayout rows="*" columns="*" width="170" paddingLeft="15">
+                        <GridLayout rows="*" columns="*" width="170" paddingLeft="15" (tap)="goToAuthor()">
                             <Image src="~/img/beyonce.png"></Image>
                             <GridLayout row="0" col="0" rows="90, 60" columns="*" verticalAlignment="bottom">
                                 <Image row="0" col="0" src="~/img/btn3.png" verticalAlignment="top" width="45" horizontalAlignment="right" marginRight="10" marginTop="5"></Image>
@@ -74,7 +74,7 @@
                 <ScrollView scrollBarIndicatorVisible="false" orientation="horizontal">
                     <StackLayout orientation="horizontal" paddingRight="15">
                         <GridLayout rows="*" columns="*" width="170" paddingLeft="15">
-                            <Image row="0" col="0" [src]="imageUri1" (tap)="playBookByBookId(latestBooks1.book_id)"></Image>
+                            <Image row="0" col="0" [src]="imageUri1" (tap)="playBookByBookId(latestBooks1.book_id)" width="170"></Image>
                             <GridLayout row="0" col="0" rows="90, 60" columns="*" verticalAlignment="bottom">
                                 <Image row="0" col="0" src="~/img/btn1.png" verticalAlignment="top" width="45" horizontalAlignment="right" marginRight="10" marginTop="5"></Image>
                                 <GridLayout rows="*, *" columns="*" row="1">
@@ -84,7 +84,7 @@
                             </GridLayout>
                         </GridLayout>
                         <GridLayout rows="*" columns="*" width="170" paddingLeft="15">
-                            <Image [src]="imageUri2" (tap)="playBookByBookId(latestBooks2.book_id)"></Image>
+                            <Image [src]="imageUri2" (tap)="playBookByBookId(latestBooks2.book_id)" width="170"></Image>
                             <GridLayout row="0" col="0" rows="90, 60" columns="*" verticalAlignment="bottom">
                                 <Image row="0" col="0" src="~/img/btn2.png" verticalAlignment="top" width="45" horizontalAlignment="right" marginRight="10" marginTop="5"></Image>
                                 <GridLayout rows="*, *" columns="*" row="1">
@@ -94,7 +94,7 @@
                             </GridLayout>
                         </GridLayout>
                         <GridLayout rows="*" columns="*" width="170" paddingLeft="15">
-                            <Image [src]="imageUri3" (tap)="playBookByBookId(latestBooks3.book_id)"></Image>
+                            <Image [src]="imageUri3" (tap)="playBookByBookId(latestBooks3.book_id)" width="170"></Image>
                             <GridLayout row="0" col="0" rows="90, 60" columns="*" verticalAlignment="bottom">
                                 <Image row="0" col="0" src="~/img/btn3.png" verticalAlignment="top" width="45" horizontalAlignment="right" marginRight="10" marginTop="5"></Image>
                                 <GridLayout rows="*, *" columns="*" row="1">

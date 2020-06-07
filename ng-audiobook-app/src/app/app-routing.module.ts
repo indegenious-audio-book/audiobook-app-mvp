@@ -5,6 +5,7 @@ import { NativeScriptRouterModule } from "nativescript-angular/router";
 const routes: Routes = [
     { path: "", redirectTo: "/home", pathMatch: "full" },
     { path: "home", loadChildren: () => import("~/app/home/home.module").then((m) => m.HomeModule) },
+    { path: "author", loadChildren: () => import("~/app/author/author.module").then((m) => m.AuthorModule) },
     { path: "browse", loadChildren: () => import("~/app/browse/browse.module").then((m) => m.BrowseModule) },
     { path: "genre", loadChildren: () => import("~/app/genre/genre.module").then((m) => m.GenreModule) },
     { path: "book", loadChildren: () => import("~/app/book/book.module").then((m) => m.BookModule) },

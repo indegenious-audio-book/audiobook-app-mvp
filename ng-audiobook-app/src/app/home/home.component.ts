@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
     imageUri2: string;
     imageUri3: string;
 
-    constructor(private bookService: BookService, private router: RouterExtensions, private page: Page) {
+    constructor(private homeService: HomeService, private router: RouterExtensions, private page: Page) {
         // Use the component constructor to inject providers.
     }
 
@@ -55,13 +55,28 @@ export class HomeComponent implements OnInit {
         //     });
         // console.log("Book list" + this.books);
 
-        this.bookService.getLatestBooks()
+        // this.homeService.getAuthors(3)
+        //     .subscribe((res: Book) => {
+        //         this.
+
+        //     })
+
+        this.homeService.getLatestBooks()
             .subscribe((res: Book) => {
                 this.setTitlesResources(res.results);
             }, (err) => {
                 console.log(err);
             });
         
+    }
+
+    setAuthorsResources(authors) {
+        this.latestBooks1 = authors[0];
+        this.latestBooks2 = authors[1];
+        this.latestBooks3 = authors[2];
+        this.imageUri1 = "http://34.93.249.161:9000/thumbnails/" + this.latestBooks1.thumbnail_url ;
+        this.imageUri2 = "http://34.93.249.161:9000/thumbnails/" + this.latestBooks2.thumbnail_url ;
+        this.imageUri3 = "http://34.93.249.161:9000/thumbnails/" + this.latestBooks3.thumbnail_url ;
     }
 
     setTitlesResources(latestBooks) {
@@ -73,8 +88,8 @@ export class HomeComponent implements OnInit {
         this.imageUri3 = "http://34.93.249.161:9000/thumbnails/" + this.latestBooks3.thumbnail_url ;
     }
 
-    goToArtist() {
-        this.router.navigate(["artist"]);
+    goToAuthor() {
+        this.router.navigate(["author"]);
     }
 
     goToPlayer() {

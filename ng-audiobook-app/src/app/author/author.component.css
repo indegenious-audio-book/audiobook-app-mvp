@@ -1,0 +1,21 @@
+StackLayout {
+    height: 300;
+    vertical-align: top;
+    margin-top: 20;
+}
+
+.authors-list-item {
+    background-color: goldenrod;
+    color: white;
+    border-width: 1;
+    border-color: floralwhite;
+}
+
+.authors-list-item>Label {
+    font-size: 25;
+    font-weight: 400;
+}
+
+.authors-parent-window {
+    padding-top: 25;
+}
