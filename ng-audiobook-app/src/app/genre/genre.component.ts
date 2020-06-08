@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { GenreService } from './genre.service';
-import { RouterExtensions } from 'nativescript-angular/router';
-import { Genre, GenreEntity } from '../data/genre.model';
-import { Page } from 'tns-core-modules/ui/page';
+import { Component, OnInit } from "@angular/core";
+import { GenreService } from "./genre.service";
+import { RouterExtensions } from "nativescript-angular/router";
+import { Genre, GenreEntity } from "../data/genre.model";
+import { Page } from "tns-core-modules/ui/page";
 
 @Component({
-    selector: 'ns-genre',
-    templateUrl: './genre.component.html',
-    styleUrls: ['./genre.component.css'],
+    selector: "ns-genre",
+    templateUrl: "./genre.component.html",
+    styleUrls: ["./genre.component.css"],
     moduleId: module.id
 })
 export class GenreComponent implements OnInit {

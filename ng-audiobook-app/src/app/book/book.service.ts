@@ -18,6 +18,10 @@ export class BookService {
         return this._http.get("http://34.93.249.161:8000/api/v1/chapters/?book="+id);
     }
 
+    getBooksByAuthor(authorName: string) {
+        return this._http.get("http://34.93.249.161:8000/api/v1/books/?author="+authorName);
+    }
+
     getBook(id: number) {
         console.log(`getBook is being passed with id:${id}`);
 

@@ -24,6 +24,7 @@ const SKELETONS: Array<BookSkeleton>  = [
 })
 export class BookComponent implements OnInit {
     genreId: any;
+    author: any;
     books: Array<BookEntity> | Array<[]>;
     // tslint:disable-next-line:max-line-length
     constructor(private bookService: BookService, private router: RouterExtensions, private page: Page, private routeParams: ActivatedRoute) { }
@@ -31,21 +32,43 @@ export class BookComponent implements OnInit {
     ngOnInit() {
         this.page.actionBarHidden = true;
         this.routeParams.params
-            .forEach((params) => { this.genreId = +params.id; });
+            .forEach((params) => {
+                if (params["id"]) {
+                    this.genreId = params.id;
+                } else if (params["author"]) {
+                    console.log("params author is passed successfully to book");
+                    this.author = params["author"];
+                } else {
+                    console.log("unsupported param passed");
+                }});
         // this.routeParams.queryParams.subscribe((params) => {
         //     this.genreId = params["id"];
         //     console.log(this.genreId);
         // });
         console.log(`book: ${this.genreId}`);
-        this.bookService.getBooksByGenre(this.genreId)
-            .subscribe((res: Book) => {
-                console.log(res.results);
-                this.books = res.results;
-            }, (err) => {
-                console.log(err);
-            });
+        console.log(`book: ${this.author}`);
+        if (this.genreId) {
+            this.bookService.getBooksByGenre(this.genreId)
+                .subscribe((res: Book) => {
+                    console.log(res.results);
+                    this.books = res.results;
+                }, (err) => {
+                    console.log(err);
+                });
 
-        console.log("Book List" + this.books);
+            console.log("Book List" + this.books);
+        }
+
+        if (this.author) {
+            this.bookService.getBooksByAuthor(this.author)
+                .subscribe((res: Book) => {
+                    console.log(res.results);
+                    this.books = res.results;
+                }, (err) => {
+                    console.log(err);
+                });
+            console.log("Book List" + this.books);
+        }
     }
 
     playBookByBookId(bookId: number) {

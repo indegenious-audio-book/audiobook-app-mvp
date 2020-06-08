@@ -57,8 +57,9 @@ export class AuthorComponent implements OnInit {
     }
 
     getBooksByAuthor(authorName: string) {
-        console.log(authorName);
-        this.router.navigate(["books", {AuthorSelected: authorName }]);
+        console.log(`author name inside author component getBooksByAuthor ${authorName}`);
+        authorName = authorName.trim().replace(" ", "_");
+        this.router.navigate(["book", { author: authorName }]);
     }
     
     templateSelector(item: any, index: number, items: Array<any>) {
