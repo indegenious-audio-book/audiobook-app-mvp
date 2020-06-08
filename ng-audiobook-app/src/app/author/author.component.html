@@ -1,0 +1,35 @@
+<!-- <StackLayout>
+    <label id="l1" text="1" horizontalAlignment="right"></label>
+    <label id="l2" text="2" verticalAlignment="bottom"></label>
+    <label id="l3" text="3"></label>
+</StackLayout> -->
+<GridLayout rows="*" columns="*" class="authors-parent-window">
+    <!-- <StackLayout> -->
+    <ListView [items]="authors" row="1" class="list-group" scrollDirection="Vertical">
+        <ng-template nsTemplateKey="template" let-item="item" let-i="index" let-odd="odd" let-even="even">
+            <!-- The item template can only have a single root view container (e.g. GridLayout, StackLayout, etc.)-->
+            <!-- <GridLayout class="list-group-item" rows="*" columns="*,auto" class="authors-list-item"> -->
+            <GridLayout class="list-group-item" rows="*" columns="*,auto">
+                <Image row="0" col="0" [src]="getAuthorsImages(item.author_name)" width="50" height="50" loadMode="async" ></Image>
+                <StackLayout row="0" col="1" (tap)="getBooksByAuthor(item.author_name)" >
+                    <!-- <Label [text]="item.authors_title" class="list-group-item-heading" ></Label> -->
+                    <Label [text]="item.author_name" class="list-group-item-text" color="#191919" textWrap="true" width="100%" ></Label>
+                </StackLayout>
+                <!-- <Label row="0" col="1" class="sfl fs18 w" [text]="item.authors_title" class="list-group-item-heading" (tap)="playAuthorByAuthorId(item.authors_id)"></Label> -->
+                <!-- <Label row="0" col="0" class="sfl fs18 w" [text]="item.authors_title" class="list-group-item-text" color="#191919" textWrap="true" width="100%" (tap)="playAuthorByAuthorId(item.authors_id)"></Label> -->
+            </GridLayout>
+        </ng-template>
+        <!-- <ng-template nsTemplateKey="skeleton" >
+            <GridLayout class="list-group-item skeleton" rows="*" columns="*,auto">
+                <Image row="0" col="0" src="~/img/curlyGirl.jpg" class="thumb img-rounded" ></Image>
+                <StackLayout row="0" col="1" >
+                    <Label [text]="item.authors_title" class="list-group-item-text skeleton" ></Label>
+                </StackLayout> -->
+                <!-- <Label row="0" col="1" class="sfl fs18 w" [text]="item.authors_title" class="list-group-item-heading" (tap)="playAuthorByAuthorId(item.authors_id)"></Label> -->
+                <!-- <Label row="0" col="0" class="sfl fs18 w" [text]="item.authors_title" class="list-group-item-text" color="#191919" textWrap="true" width="100%" (tap)="playAuthorByAuthorId(item.authors_id)"></Label> -->
+            <!-- </GridLayout>
+        </ng-template> -->
+    </ListView>
+
+    <!-- </StackLayout> -->
+</GridLayout>

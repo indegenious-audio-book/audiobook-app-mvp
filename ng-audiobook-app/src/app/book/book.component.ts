@@ -55,6 +55,5 @@ export class BookComponent implements OnInit {
     
     templateSelector(item: any, index: number, items: Array<any>) {
         return "template";
-    };
-
+    }
 }
